@@ -57,4 +57,18 @@ class MajorSystemTest extends FlatSpec with Matchers {
   it should "be case insensitive" in {
     MajorSystem.encode("HOLA CaraCola") shouldBe "54045"
   }
+
+  it should "write a tag for the empty word" in {
+    MajorSystem.tag("") shouldBe """<code class="mms"></code>"""
+  }
+
+  it should "write tags for non-consonant letters" in {
+    MajorSystem.tag("aei ou! y aa?") shouldBe """<code class="mms">aei ou! y aa?</code>"""
+  }
+
+  it should "highlight letters in tags" in {
+    MajorSystem.tag("adula a Adán") shouldBe """<code class="mms">a<font color="#0000ff">d</font>u<font color="#0000ff">l</font>a a A<font color="#0000ff">d</font>á<font color="#0000ff">n</font></code>"""
+    MajorSystem.tag("Adularme-se") shouldBe """<code class="mms">A<font color="#0000ff">d</font>u<font color="#0000ff">l</font>a<font color="#0000ff">rm</font>e-<font color="#0000ff">s</font>e</code>"""
+    MajorSystem.tag("cacao") shouldBe """<code class="mms"><font color="#0000ff">caca</font>o</code>"""
+  }
 }

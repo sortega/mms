@@ -14,7 +14,8 @@ object MajorSystem {
         case 't' | 'd' => result.append('1')
 
         case 'c' if it.nonEmpty && it.head == 'h' => result.append('1')
-        case 'c' if it.nonEmpty && (it.head == 'e' || it.head == 'i') => result.append('7')
+        case 'c' if it.nonEmpty && (it.head == 'e' || it.head == 'i') =>
+          result.append('7')
         case 'c' => result.append('4')
 
         case 'n' | 'ñ' => result.append('2')
@@ -41,4 +42,11 @@ object MajorSystem {
     result.toString
   }
 
+  def tag(text: String): String = {
+    val pattern = """(?i)(rr?|ll?|c[aeiouáéíóúh]?|[tdmnñkqsxfzgjpbv])+""".r
+    val highlightedText = pattern.replaceAllIn(
+      text,
+      matched => s"""<font color="#0000ff">$matched</font>""")
+    s"""<code class="mms">$highlightedText</code>"""
+  }
 }

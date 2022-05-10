@@ -93,11 +93,15 @@ object IndexerMain extends App {
     }
   }
 
-  val number = "1004"
+  val number = "1512"
+  // delirium - adularais
+  // adular me/se
   println(s"Mnemonics for $number")
   mnemonicSearch(number = number).take(20).zipWithIndex.foreach {
     case (phrase, index) =>
       println(s" * ${index + 1}: ${phrase.mkString(" ")}")
   }
 
+  val sentence = "adularme-se"
+  println(MajorSystem.tag(sentence))
 }
